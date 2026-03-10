@@ -133,31 +133,30 @@ Safety Department – Veerka Beverage Pvt Ltd
 
 const scriptURL="https://script.google.com/macros/s/AKfycbyKm9Ooend7JwpjLM-RAVsnYM5pHe6Dj6eG0psnftlPO2OJKPdVqiiU4BIVSskPolLu/exec";
 
-document.getElementById("safetyForm").addEventListener("submit",function(e){
+document.getElementById("safetyForm").addEventListener("submit", function(e){
 
 e.preventDefault();
 
 let data={
-
 name:document.getElementById("name").value,
 department:document.getElementById("department").value,
 category:document.getElementById("category").value,
 area:document.getElementById("area").value,
 observation:document.getElementById("observation").value
-
 };
 
 fetch(scriptURL,{
 method:"POST",
+mode:"no-cors",
+headers:{
+"Content-Type":"application/json"
+},
 body:JSON.stringify(data)
 })
-.then(res=>alert("Report Submitted Successfully"))
-.catch(err=>alert("Error submitting form"));
+
+.then(()=>alert("Report Submitted Successfully"))
+.catch(()=>alert("Error submitting form"));
 
 });
 
 </script>
-
-</body>
-
-</html>
