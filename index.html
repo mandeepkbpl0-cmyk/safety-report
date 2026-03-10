@@ -1,54 +1,70 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
-<title>Veerka Beverage Safety Reporting</title>
+<title>Safety Observation Reporting</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 
 body{
-font-family: Arial;
-background:#f4f4f4;
+font-family:Arial;
+background:#eef2f3;
 margin:0;
 }
 
 .header{
-background:#008060;
+background:#00695c;
 color:white;
-padding:20px;
+padding:25px;
 text-align:center;
 }
 
 .container{
-width:90%;
-max-width:600px;
-margin:auto;
+max-width:650px;
 background:white;
-padding:20px;
-margin-top:20px;
+margin:auto;
+margin-top:30px;
+padding:25px;
 border-radius:10px;
-box-shadow:0 0 10px gray;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
-input, select, textarea{
+label{
+font-weight:bold;
+}
+
+input,select,textarea{
 width:100%;
 padding:10px;
-margin-top:5px;
+margin-top:6px;
 margin-bottom:15px;
-border:1px solid #ccc;
 border-radius:5px;
+border:1px solid #ccc;
 }
 
 button{
-background:#008060;
+background:#00695c;
 color:white;
 border:none;
-padding:12px;
+padding:14px;
 width:100%;
 font-size:16px;
 border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#004d40;
+}
+
+.footer{
+text-align:center;
+margin-top:20px;
+font-size:14px;
+color:gray;
 }
 
 </style>
@@ -75,6 +91,7 @@ border-radius:5px;
 <input type="text" id="department" required>
 
 <label>Category</label>
+
 <select id="category">
 
 <option>Unsafe Act</option>
@@ -88,6 +105,7 @@ border-radius:5px;
 <select id="area">
 
 <option>Main Building</option>
+<option>Preform Storage</option>
 <option>Power House</option>
 <option>Boiler Area</option>
 <option>WTP Area</option>
@@ -95,8 +113,9 @@ border-radius:5px;
 
 </select>
 
-<label>Observation</label>
-<textarea id="observation"></textarea>
+<label>Observation Details</label>
+
+<textarea id="observation" rows="4"></textarea>
 
 <button type="submit">Submit Report</button>
 
@@ -104,15 +123,21 @@ border-radius:5px;
 
 </div>
 
+<div class="footer">
+
+Safety Department – Veerka Beverage Pvt Ltd
+
+</div>
+
 <script>
 
-const scriptURL = "https://script.google.com/macros/s/AKfycbwTn3inAdqcHzYThOas6WGzsDyMNVu0bRNAe4uHibJvTMC14vNtFbvg_PX9pPWE71Uy/exec";
+const scriptURL="https://script.google.com/macros/s/AKfycbyKm9Ooend7JwpjLM-RAVsnYM5pHe6Dj6eG0psnftlPO2OJKPdVqiiU4BIVSskPolLu/exec";
 
-document.getElementById("safetyForm").addEventListener("submit", function(e){
+document.getElementById("safetyForm").addEventListener("submit",function(e){
 
 e.preventDefault();
 
-let data = {
+let data={
 
 name:document.getElementById("name").value,
 department:document.getElementById("department").value,
@@ -127,11 +152,12 @@ method:"POST",
 body:JSON.stringify(data)
 })
 .then(res=>alert("Report Submitted Successfully"))
-.catch(err=>alert("Error"));
+.catch(err=>alert("Error submitting form"));
 
 });
 
 </script>
 
 </body>
+
 </html>
