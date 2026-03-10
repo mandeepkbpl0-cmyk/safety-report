@@ -1,39 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Veerka Beverage Safety Reporting</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+font-family: Arial;
+background:#f4f4f4;
+margin:0;
+}
+
+.header{
+background:#008060;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+width:90%;
+max-width:600px;
+margin:auto;
+background:white;
+padding:20px;
+margin-top:20px;
+border-radius:10px;
+box-shadow:0 0 10px gray;
+}
+
+input, select, textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+background:#008060;
+color:white;
+border:none;
+padding:12px;
+width:100%;
+font-size:16px;
+border-radius:5px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h2>Veerka Beverage Pvt Ltd</h2>
+<h3>Safety Observation Reporting System</h3>
+
+</div>
+
 <div class="container">
 
-<form action="https://formsubmit.co/mandeepkbpl0@gmail.com" method="POST" enctype="multipart/form-data">
+<form id="safetyForm">
 
 <label>Employee Name</label>
-<input type="text" name="name" required>
+<input type="text" id="name" required>
 
 <label>Department</label>
-<input type="text" name="department" required>
+<input type="text" id="department" required>
 
-<label>Select Area</label>
+<label>Category</label>
+<select id="category">
 
-<select name="area" required>
-
-<option value="">Select Area</option>
-
-<option>Main Building</option>
-<option>Preform Storage area</option>
-<option>Power House</option>
-<option>ETP Area</option>
-<option>Boiler Area</option>
-<option>WTP Area</option>
-<option>Shipping area</option>
+<option>Unsafe Act</option>
+<option>Unsafe Condition</option>
+<option>Near Miss</option>
 
 </select>
 
-<label>Upload Photo</label>
+<label>Area</label>
 
-<input type="file" name="photo" accept="image/*">
+<select id="area">
 
-<label>Observation Details</label>
+<option>Main Building</option>
+<option>Power House</option>
+<option>Boiler Area</option>
+<option>WTP Area</option>
+<option>ETP Area</option>
 
-<textarea name="message" rows="4" required></textarea>
+</select>
+
+<label>Observation</label>
+<textarea id="observation"></textarea>
 
 <button type="submit">Submit Report</button>
 
 </form>
 
 </div>
+
+<script>
+
+const scriptURL = "https://script.google.com/macros/s/AKfycbwTn3inAdqcHzYThOas6WGzsDyMNVu0bRNAe4uHibJvTMC14vNtFbvg_PX9pPWE71Uy/exec";
+
+document.getElementById("safetyForm").addEventListener("submit", function(e){
+
+e.preventDefault();
+
+let data = {
+
+name:document.getElementById("name").value,
+department:document.getElementById("department").value,
+category:document.getElementById("category").value,
+area:document.getElementById("area").value,
+observation:document.getElementById("observation").value
+
+};
+
+fetch(scriptURL,{
+method:"POST",
+body:JSON.stringify(data)
+})
+.then(res=>alert("Report Submitted Successfully"))
+.catch(err=>alert("Error"));
+
+});
+
+</script>
+
+</body>
+</html>
